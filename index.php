@@ -1,1 +1,1 @@
-<?php header('location: / pratica12.html'); ?>
+<?php header('location: /pratica12.html'); ?>
