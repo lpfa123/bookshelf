@@ -150,9 +150,9 @@ var BookShelf1 = new BookShelf();
 
 BookShelf1.load("java for dummies"); 
 
-$("#btn").off('click');
-$("#btn").click(data,function(event){
-  event.input = $("#");
+$(".btn").off('click');
+$(".btn").click(data,function(event){
+  event.input = $(".");
   event.data.load.search.render(envent,data,search);
 })
 
