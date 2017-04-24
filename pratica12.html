@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BookMatch</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<link rel="stylesheet" type="text/css" href="style.css">
+
+	</head>
+
+	<body>
+		<div class="container-fluid">
+
+			<div class="row">
+	<!-- *********************************************************** Cabeçalho ****************************************************** -->
+				<div id="cabeçalho" class="col-md-12">
+					<h1 class="titulocabeçalho">BookMatch</h1>
+				</div>
+	<!-- ************************************************************Barra de navegação ***********************************************-->
+<!-- do gonçaloooooooooo ************************************************************************************************-->
+<!-- navigation button -->
+
+				 <div id="naveg" class="col-md-12">
+					 <ul class="naveglist">
+					 <li role="presentation" class="active"><a href="#">Home</a></li>
+					  <li role="presentation"><a href="#">Daily Selection</a></li>
+					  <li role="presentation"><a href="#">Upcoming</a></li>
+					  <li role="presentation"><a href="#">Daily Selection</a></li>
+
+					  <!-- *************** pulldown ************ -->
+
+							  <li class="dropdown">
+						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
+						          <ul class="dropdown-menu">
+
+						            <li><a href="#">Science fiction</a></li>
+						            <li><a href="#">Drama</a></li>
+						            <li><a href="#">Romance</a></li>
+						            <li><a href="#">Health</a></li>
+						            <li><a href="#">Travel</a></li>
+						            <li><a href="#">Children's</a></li>
+						            <li><a href="#">History</a></li>
+						            <li><a href="#">Poetry</a></li>
+						            <li><a href="#">Art</a></li>
+						            <li><a href="#">Religion</a></li>
+						            <li><a href="#">Mystery</a></li>
+						            <li><a href="#">Text Books</a></li>
+	
+						          </ul>
+					          </li>
+
+						<!-- search -->
+
+					    <form class="form">
+      						<input class="form-inout" type="text" placeholder="Search for books">
+      						<button class="btn " type="submit">Search</button>
+    					</form>
+
+
+
+			          <!-- LOG IN -->
+
+					  <li id="login" role="presentation"><a href="#">
+					  	<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+					  		Log in
+				  		</a></li>
+
+				  	<!-- Sign up -->
+
+					  <li id="sign" role="presentation"><a href="#">
+					  	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					  		Sign up
+				  		</a></li>
+
+					</ul>
+
+				 </div>
+
+	<!-- ************************************************************* 1ª coluna ********************************************************-->
+				<div id="coluna1" class="col-md-4">
+
+					<!-- imagem -->
+					<div class="container">
+					<div class="col-md-12">
+						<img alt="Avatar" class="imagem">
+						<div class="middle">
+
+						<!-- os botoes e contadores ficam aqui para aparecerem em hover na imagem e ela faz fade -->
+							<div class="middle">
+								<div class="col-md-6">
+
+								<button class="likebutton">Like
+								</button>
+
+								<div class="contadorlike" id="c11">0</div>
+								</div>
+
+								<div class="col-md-6">
+
+								<button class="dntlikebutton";">DisLike
+								</button>
+
+								<div class="contadordntlike" id="c12">0</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					</div>
+
+					<!-- Titulo Livro -->
+					<div class="col-md-12">
+						<h2 class="titulo"></h2>
+					</div>
+
+					<!-- REsumo do livro -->
+					<div id= "resumosdiv" class="col-md-12">
+						<p class="resumos">	</p>
+					</div>
+
+					<!-- link para "ler mais"-->
+					<div id="readmore" class="col-md-12">
+
+						<a href="" class="readmore">Read more</a>
+					</div>
+
+					<!-- Links -->
+					<div class="links" class="col-md-12">
+
+						<div id="goodread" class="col-md-6">
+							<a href="">Book Review</a>
+						</div>
+
+						<div id="fnac" class="col-md-6">
+							<a href="">FNAC</a>
+						</div>
+
+					</div>
+				</div>
+
+	<!-- ************************************************************* 2ª coluna ********************************************************-->
+				<div id="coluna2" class="col-md-4">
+
+					<!-- imagem -->
+					<div class="container">
+					<div class="col-md-12">
+						<img alt="Avatar" class="imagem">
+						<div class="middle">
+
+						<!-- os botoes e contadores ficam aqui para aparecerem em fade na imagem -->
+							<div class="middle">
+								<div class="col-md-6">
+								<button class="likebutton";">L
+								</button>
+
+								<div class="contadorlike" id="c11">0</div>
+								</div>
+
+								<div class="col-md-6">
+								<button class="dntlikebutton";">DL
+								</button>
+								<div class="contadordntlike" id="c12">0</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					</div>
+
+					<!-- Titulo Livro -->
+					<div class="col-md-12">
+						<h2 class="titulo"></h2>
+					</div>
+
+					<!-- REsumo do livro -->
+					<div id= "resumosdiv" class="col-md-12">
+						<p class="resumos">	</p>
+					</div>
+					<!-- link para "ler mais"-->
+					<div id="readmore" class="col-md-12">
+
+						<a href="" class="readmore">Read more</a>
+					</div>
+
+
+					<!-- Links -->
+					<div class="links" class="col-md-12">
+
+						<div id="goodread" class="col-md-6">
+							<a href="">Book Review</a>
+						</div>
+
+						<div id="fnac" class="col-md-6">
+							<a href="">FNAC</a>
+						</div>
+
+					</div>
+				</div>
+	<!-- ************************************************************* 3ª coluna ********************************************************-->
+				<div id="coluna3" class="col-md-4">
+
+					<!-- imagem -->
+					<div class="container">
+					<div class="col-md-12">
+						<img alt="Avatar" class="imagem">
+						<div class="middle">
+
+						<!-- os botoes e contadores ficam aqui para aparecerem em fade na imagem -->
+							<div class="middle">
+								<div class="col-md-6">
+								<button class="likebutton";">L
+								</button>
+
+								<div class="contadorlike" id="c11">0</div>
+								</div>
+
+								<div class="col-md-6">
+								<button class="dntlikebutton";">DL
+								</button>
+								<div class="contadordntlike" id="c12">0</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					</div>
+
+					<!-- Titulo Livro -->
+					<div class="col-md-12">
+						<h2 class="titulo"></h2>
+					</div>
+
+					<!-- REsumo do livro -->
+					<div id= "resumosdiv" class="col-md-12">
+						<p class="resumos">	</p>
+					</div>
+					<!-- link para "ler mais"-->
+					<div id="readmore" class="col-md-12">
+
+						<a href="" class="readmore">Read more</a>
+					</div>
+
+					<!-- Links -->
+					<div class="links" class="col-md-12">
+
+						<div id="goodread" class="col-md-6">
+							<a href="">Book Review</a>
+						</div>
+
+						<div id="fnac" class="col-md-6">
+							<a href="">FNAC</a>
+						</div>
+
+					</div>
+				</div>
+
+
+	<!-- ********************************************************** Rodapé ************************************************** -->
+
+				<div id="rodape" class="cl-md-12">
+					<p>Luis Alves - AUDAX-ISCTE - UPAcademy - 2017</p>
+				</div>
+
+			</div>
+		</div>
+	<!-- ********************************************************** SCRIPTS ************************************************** -->
+			<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+
+			<!-- Latest compiled and minified JavaScript -->
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+			<script src="script15.js"></script>
+
+	</body>
+</html>
