@@ -43,6 +43,7 @@ function Book (titulo, imagem, resumos, links, isbn){
     $(idButton).click(data,function(event){
         event.data.book.like();
         event.data.book.render(event.data.id);
+        event.preventDefault();
        
     });
 
@@ -53,6 +54,7 @@ function Book (titulo, imagem, resumos, links, isbn){
         event.data.book.dntlike();
         event.data.book.render(event.data.id);
         event.data.book.bookshelf.switch(event.data.id);
+        event.preventDefault();
     });
 
   }
@@ -68,13 +70,13 @@ function Queue (){
   }
 
   this.dequeue = function (){
-    var aux = this.data[0];
-    this.data = this.data.slice(1,this.data.length);
-    return aux;
+    return this.data.shift();
   }
 }
 
 function BookShelf (){
+
+  var bookShelforSearch = this;
 
   this.shelf = new Queue();
 
@@ -84,13 +86,13 @@ function BookShelf (){
   }
 
   this.init = function () {
-    var firstDeq = this.shelf.dequeue();
-    var secondDeq = this.shelf.dequeue();
-    var thirdDeq = this.shelf.dequeue();
+    var primeiroDeq = this.shelf.dequeue();
+    var segundoDeq  = this.shelf.dequeue();
+    var terceiroDeq = this.shelf.dequeue();
 
-    firstDeq.render("coluna1");
-    secondDeq.render("coluna2");
-    thirdDeq.render("coluna3");
+    primeiroDeq.render("coluna1");
+    segundoDeq.render("coluna2");
+    terceiroDeq.render("coluna3");
   }
 
   this.switch = function(coluna){
@@ -121,9 +123,30 @@ function BookShelf (){
         var allbooks = new Book(titulo, imagem, resumos, 0, 0);
         this.addBook(allbooks);
       }
-      this.init()
+      this.init();
   }
 
+  this.newSearch = function(data){
+
+  	this.data = [];
+
+  	this.data.push(element);
+
+  	this.addBook(allbooks);
+
+  	this.init();
+
+  }
+
+  var input = this;
+
+  $("#searchbtn").off('click');
+  $("#searchbtn").click(input, function(event){
+    event.input = $("#inputext").val();
+    bookShelforSearch.load(event.input);
+    event.preventDefault();
+
+  })
 }
 
 
@@ -148,12 +171,81 @@ var book9 = new Book("Dracula", "http://static.fnac-static.com/multimedia/Images
 
 var BookShelf1 = new BookShelf();
 
-BookShelf1.load("java for dummies"); 
+BookShelf1.load(""); 
 
-$(".btn").off('click');
-$(".btn").click(data,function(event){
-  event.input = $(".");
-  event.data.load.search.render(envent,data,search);
+// ********************************* BASE DE DADOS SQL LITE3 ********************************
+
+var db = openDatabase("like.db", "1.0", "bd books", 2*1024*1024);
+
+db.transaction(function(tx){
+
+  //tx.executeSql("DROP TABLE USER;")
+  tx.executeSql("CREATE TABLE USER("+"IP TEXT PRIMARY KEY NOT NULL"+"NAME TEXT NOT NULL"+" FOREIGN KEY (IP) REFERENCES LIKES(IP)"+");"
+);
+  //tx.executeSql("DROP TABLE BOOK;")
+  tx.executeSql("CREATE TABLE BOOK("+"ID INTEGER PRIMARY KEY NOT NULL"+"ISBN INT NOT NULL "+"TITLE TEXT NOT NULL"+"RESUMO TEXT NOT NULL"+"FOREIGN KEY (ID) REFERENCES LIKES(ID)"+");"
+);
+  //tx.executeSql("DROP TABLE LIKES;")
+  tx.executeSql("CREATE TABLE LIKES ("+"LIKES_COUNT INT NOT NULL"+"DISLIKES_COUNT INT NOT NULL"+"IP TEXT NOT NULL"+"ID INT NOT NULL"+"FOREIGN KEY (IP) REFERENCES USER(IP)"+" FOREIGN KEY (ID) REFERENCES BOOK(ID)"+");"
+);
+
+});
+
+db.transaction(function(tx){
+
+  //tx.executeSql("DELETE FROM USER;");
+  tx.executeSql("INSERT INTO USER (IP, NAME) "+" VALUES (1, 'Luis'));");
+  tx.executeSql("INSERT INTO USER (IP, NAME) "+" VALUES (2, 'Manolo'));");
+  tx.executeSql("INSERT INTO USER (IP, NAME) "+" VALUES (3, 'Antonio'));");
+  tx.executeSql("INSERT INTO USER (IP, NAME) "+" VALUES (4, 'jose'));");
+  tx.executeSql("INSERT INTO USER (IP, NAME) "+" VALUES (5, 'Pedro'));");
+  tx.executeSql("INSERT INTO USER (IP, NAME) "+" VALUES (6, 'Gil'));");
+
+
+  //tx.executeSql("DELETE FROM BOOK;");
+  tx.executeSql("INSERT INTO BOOK (ID, ISBN, TITLE, RESUMO) "+" VALUES (1, 123, 'Java for DUMMIES', 'Do you think the programmers who work at your office are magical wizards who hold special powers that manipulate your computer? Believe it or not, anyone can learn how to write programs, and it doesnt take a higher math and science education to start.Beginning Programming for Dummies shows you how computer programming works without all the technical details or hard programming language. It explores the common parts of every computer programming language and how to write for multiple platforms like Windows, Mac OS X, or Linux. This easily accessible guide provides you with the tools you need to: Create programs and divide them into subprogramsDevelop variables and use constantsManipulate strings and convert them into numbersUse an array as storage spaceReuse and rewrite codeIsolate dataCreate a user interfaceWrite programs for the InternetUtilize JavaScript and Java Applets');");
+
+  tx.executeSql("INSERT INTO BOOK (ID, ISBN, TITLE, RESUMO) "+" VALUES (2, 234, 'Os Maias', 'A accao de Os Maias passa-se em Lisboa, na segunda metade dos scc. XIX. Conta-nos a historia de tres gerações da familia Maia. A accao inicia-se no Outono de 1875, altura em que Afonso da Maia, nobre e rico proprietario, se instala no Ramalhete. O seu unico filho  Pedro da Maia  de caracter fraco, resultante de um educacao extremamente religiosa e proteccionista, casa-se, contra a vontade do pai, com a negreira Maria Monforte, de quem tem dois filhos , um menino e uma menina. Mas a esposa acabaria por o abandonar para fugir com um Napolitano, levando consigo a filha, de quem nunca mais se soube o paradeiro. O filho , Carlos da Maia , viria a ser entregue aos cuidados do avo, apos o suicidio de Pedro da Maia.');");
+
+  tx.executeSql("INSERT INTO BOOK (ID, ISBN, TITLE, RESUMO) "+" VALUES (3, 345, 'Um Milinario em Lisboa', 'Baseado em acontecimentos veridicos, Um Milionario em Lisboa conclui a espantosa história iniciada em O Homem de Constantinopla e transporta-nos no percurso da vida do armenio que mudou o mundo , confirmando Jose Rodrigues dos Santos como um dos maiores narradores da literatura contemporanea. Kaloust Sarkisian completa a arquitectura do negocio mundial do petroleo e torna se o homem mais rico do seculo. Dividido entre Paris e Londres, cidades em cujas suites dos hoteis Ritz mantem em permanencia uma beldade nubil, dedica-se a arte e torna se o maior coleccionador do seu tempo. Mas o destino interveio. O horror da matanca dos Armenios na Primeira Guerra Mundial e a hecatombe da Segunda Guerra Mundial levam o milionario armenio a procurar um novo sitio para viver. Apos semanas a agonizar sobre a escolha que teria de fazer, e o filho quem lhe apresenta a solucao: Lisboa. O homem mais rico do planeta decide viver no bucolico Portugal. O pais agita se, Salazar questiona se, o mundo do petroleo espanta se. E a policia portuguesa prende o');");
+
+  tx.executeSql("INSERT INTO BOOK (ID, ISBN, TITLE, RESUMO) "+" VALUES (4, 456, 'Viagem ao Centro da Terra', 'Livro recomendado pelo Plano Nacional de Leitura 3 Ciclo Leitura Autónoma Depois de descobrir e decifrar um misterioso manuscrito rúnico, onde um alquimista islandês afirma ter ido ao centro da Terra, o Professor Otto Lidenbrock, o seu sobrinho Axel e Hans, um caçador islandês, partem numa grandiosa viagem às profundezas da Terra. E é então que começa a verdadeira aventura. Um novo mundo aguarda-os, um mundo onde o tempo parou…onde os dinossauros ainda andam pelas florestas, gigantescos animais dominam os mares e homens pré-históricos habitam as cavernas. Mas conseguirá o grupo regressar a casa e abandonar um mundo repleto de perigos?');");
+
+  tx.executeSql("INSERT INTO BOOK (ID, ISBN, TITLE, RESUMO) "+" VALUES (5, 567, 'Monstros Fantasticos e Onde encontra-los', 'Livro recomendado pelo Plano Nacional de Leitura 3 Ciclo Leitura Autónoma Depois de descobrir e decifrar um misterioso manuscrito rúnico, onde um alquimista islandês afirma ter ido ao centro da Terra, o Professor Otto Lidenbrock, o seu sobrinho Axel e Hans, um caçador islandês, partem numa grandiosa viagem às profundezas da Terra. E é então que começa a verdadeira aventura. Um novo mundo aguarda-os, um mundo onde o tempo parou…onde os dinossauros ainda andam pelas florestas, gigantescos animais dominam os mares e homens pré-históricos habitam as cavernas. Mas conseguirá o grupo regressar a casa e abandonar um mundo repleto de perigos?');");
+
+    //tx.executeSql("DELETE FROM LIKES;");
+    tx.executeSql("INSERT INTO LIKES (LIKES_COUNT, DISLIKES_COUNT, ID, IP) "+" VALUES (1, 0, 1, 3);");
+    tx.executeSql("INSERT INTO LIKES (LIKES_COUNT, DISLIKES_COUNT, ID, IP) "+" VALUES (1, 0, 2, 3);");
+    tx.executeSql("INSERT INTO LIKES (LIKES_COUNT, DISLIKES_COUNT, ID, IP) "+" VALUES (0, 1, 3, 3);");
+    tx.executeSql("INSERT INTO LIKES (LIKES_COUNT, DISLIKES_COUNT, ID, IP) "+" VALUES (1, 0, 4, 3);");
+    tx.executeSql("INSERT INTO LIKES (LIKES_COUNT, DISLIKES_COUNT, ID, IP) "+" VALUES (1, 0, 5, 3);");
+
+});
+
+db.transaction(function(tx){
+  tx.executeSql("SELECT * FROM USER", [], function(tx, results){
+
+    var len = results.rows.length, i;
+
+    for(i=0; i<len; i++){
+      alert(results.rows[i]['IP']);
+    }
+  });
+
 })
 
+
+//a funcao que dinamiza entre base de dados e a pagina
+/*function insertArtist (name, cache, typr){
+  db.transaction(function(tx){
+    var sql = "INSERT INTO LIKES (LIKES_COUNT, DISLIKES_COUNT, ID, IP) "+" VALUES ('"+name+"',"'CACHE'", '"+'"");";
+    tx.executeSql(sql);
+    });
+}*/
+
+
+
+
+//retirar o ID porque assim nao se pode replicar o ID da maria leal, e por consequencia apenas aparece uma pop up
+  //tx.executeSql("INSERT INTO ARTIST  ( NAME, CACHE, TYPE)" + "VALUES ( 'Maria Leal', 4000.0, 'Mau');")
 
